@@ -9,4 +9,5 @@
 	url = https://github.com/heiher/lwip
 [submodule "src/core"]
 	path = src/core
-	url = https://github.com/heiher/hev-socks5-core
+	url = https://github.com/Tozward/hev-socks5-core
+	branch = feat-uds
