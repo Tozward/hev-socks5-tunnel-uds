@@ -221,13 +221,14 @@ hev_config_parse_socks5 (yaml_document_t *doc, yaml_node_t *base)
             mark = value;
     }
 
-    if (!port) {
-        fprintf (stderr, "Can't found socks5.port!\n");
+    if (!addr) {
+        fprintf (stderr, "Can't found socks5.address!\n");
         return -1;
     }
 
-    if (!addr) {
-        fprintf (stderr, "Can't found socks5.address!\n");
+    int is_uds = addr && (addr[0] == '/' || addr[0] == '@');
+    if (!is_uds && !port) {
+        fprintf (stderr, "Can't found socks5.port for non-UDS address!\n");
         return -1;
     }
 
@@ -237,7 +238,8 @@ hev_config_parse_socks5 (yaml_document_t *doc, yaml_node_t *base)
     }
 
     strncpy (srv.addr, addr, 256 - 1);
-    srv.port = strtoul (port, NULL, 10);
+    if (port)
+        srv.port = strtoul (port, NULL, 10);
 
     if (pipe && (strcasecmp (pipe, "true") == 0))
         srv.pipeline = 1;
