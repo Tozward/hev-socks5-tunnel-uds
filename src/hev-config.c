@@ -246,6 +246,8 @@ hev_config_parse_socks5 (yaml_document_t *doc, yaml_node_t *base)
 
     if (udpm && (strcasecmp (udpm, "udp") == 0))
         srv.udp_in_udp = 1;
+    else if (udpm && (strcasecmp (udpm, "uot") == 0))
+        srv.udp_in_uot = 1;
 
     if (udpa)
         strncpy (srv.udp_addr, udpa, 256 - 1);

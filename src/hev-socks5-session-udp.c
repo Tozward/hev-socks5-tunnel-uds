@@ -352,6 +352,8 @@ hev_socks5_session_udp_construct (HevSocks5SessionUDP *self,
 
     if (srv->udp_in_udp)
         type = HEV_SOCKS5_TYPE_UDP_IN_UDP;
+    else if (srv->udp_in_uot)
+        type = HEV_SOCKS5_TYPE_UDP_OVER_TCP;
     else
         type = HEV_SOCKS5_TYPE_UDP_IN_TCP;
 
